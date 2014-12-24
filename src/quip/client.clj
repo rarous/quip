@@ -6,8 +6,8 @@
   Typical usage:
         (let [opts {:access-token \"...\"}
               user @(quip/current-user opts)
-              desktop @(quip/folders (:desktop_folder_id user) opts)]
-            (println \"There are\" (count (:children desktop)) \"items on the desktop\"))
+              desktop @(quip/folders (get user \"desktop_folder_id\") opts)]
+            (println \"There are\" (count (get desktop \"children\")) \"items on the desktop\"))
 
   In addition to standard getters and setters, we provide a few convenience
   methods for document editing. For example, you can use `add-to-first-list`
