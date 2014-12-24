@@ -6,4 +6,6 @@
   :dependencies [[com.cognitect/transit-clj "0.8.259"]
                  [http-kit "2.1.19"]]
   :profiles {:provided {:dependencies [[org.clojure/clojure "1.6.0"]]}}
-  :deploy-repositories [["releases" :clojars]])
+  :scm {:name "git" :url "https://github.com/rarous/quip"}
+  :deploy-repositories [["releases" :clojars]
+                        ["clojars" {:creds :gpg}]])
