@@ -1,8 +1,9 @@
 (defproject rarous/quip "0.1.0-SNAPSHOT"
   :description "Clojure client for Quip APIs"
   :url "https://github.com/rarous/quip"
-  :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.7.0-alpha4"]
-                 [com.cognitect/transit-clj "0.8.259"]
-                 [http-kit "2.1.19"]])
+  :license {:name "Apache License, Version 2.0"
+            :url "http://www.apache.org/licenses/LICENSE-2.0"}
+  :dependencies [[com.cognitect/transit-clj "0.8.259"]
+                 [http-kit "2.1.19"]]
+  :profiles {:provided {:dependencies [[org.clojure/clojure "1.6.0"]]}}
+  :deploy-repositories [["releases" :clojars]])
