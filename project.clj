@@ -1,4 +1,4 @@
-(defproject rarous/quip "0.1.0-SNAPSHOT"
+(defproject rarous/quip "0.1.0"
   :description "Clojure client for Quip APIs"
   :url "https://github.com/rarous/quip"
   :license {:name "Apache License, Version 2.0"
