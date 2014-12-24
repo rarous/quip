@@ -14,10 +14,8 @@
   to append items (in Markdown) to the first bulleted or checklist in a
   given document, which is useful for automating a task list."
   (:require [clojure.string :refer [join]]
-            [clojure.walk :refer [keywordize-keys]]
             [cognitect.transit :as t]
-            [org.httpkit.client :as http])
-  (:import [java.io ByteArrayInputStream ByteArrayOutputStream]))
+            [org.httpkit.client :as http]))
 
 (def ^:private endpoint "https://platform.quip.com/1")
 (def ^:private blob-uri (str endpoint "/blob/"))
@@ -40,7 +38,7 @@
      (fn [{:keys [error body] :as resp}]
        (if-not error
          (deliver ret (callback resp))
-         (deliver ret (keywordize-keys (read-json body))))))
+         (deliver ret (read-json body)))))
     ret))
 
 (defn- get-json-response [[resource id] options]
@@ -48,9 +46,7 @@
     (get-response
      uri options
      (fn [{:keys [body]}]
-       (if (sequential? id)
-         (into {} (map (fn [[k v]] [k (keywordize-keys v)])) (read-json body))
-         (keywordize-keys (read-json body)))))))
+       (read-json body)))))
 
 (defn blob
   "Retrieves the binary representation of the given blob from the given
