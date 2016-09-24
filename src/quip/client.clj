@@ -13,11 +13,12 @@
   methods for document editing. For example, you can use `add-to-first-list`
   to append items (in Markdown) to the first bulleted or checklist in a
   given document, which is useful for automating a task list."
-  (:require [clojure.string :refer [join]]
-            [cognitect.transit :as t]
-            [org.httpkit.client :as http]))
+  (:require
+    [clojure.string :as string]
+    [cognitect.transit :as t]
+    [org.httpkit.client :as http]))
 
-(def ^:private endpoint "https://platform.quip.com/1")
+(def endpoint "https://platform.quip.com/1")
 (def ^:private blob-uri (str endpoint "/blob/"))
 
 (defn- options [access-token]
@@ -28,7 +29,7 @@
 (defn- read-json [stream] (t/read (reader stream)))
 (defn- ids [in]
   (if (sequential? in)
-    (str "?ids=" (join "," in))
+    (str "?ids=" (string/join "," in))
     in))
 
 (defn- get-response [uri options callback]
@@ -42,7 +43,7 @@
     ret))
 
 (defn- get-json-response [[resource id] options]
-  (let [uri (join "/" [endpoint resource (ids id)])]
+  (let [uri (string/join "/" [endpoint resource (ids id)])]
     (get-response
      uri options
      (fn [{:keys [body]}]
